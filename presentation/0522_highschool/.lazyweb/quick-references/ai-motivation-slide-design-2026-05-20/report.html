@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Quick References: AI Motivation Slide Design</title>
+<style>
+  :root { --ink:#0b1020; --muted:#5b6475; --blue:#2d6bff; --lav:#8b5cf6; --bg:#f6f8fc; --card:#ffffff; }
+  * { box-sizing: border-box; }
+  body { margin:0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif; color:var(--ink); background:linear-gradient(180deg,#f9fbff 0%,#eef4ff 100%); line-height:1.65; }
+  main { max-width: 980px; margin: 0 auto; padding: 48px 24px 96px; }
+  h1 { font-size: clamp(36px, 6vw, 64px); line-height:1.02; letter-spacing:-0.05em; margin: 20px 0 28px; }
+  h2 { font-size: 30px; line-height:1.15; letter-spacing:-0.035em; margin: 56px 0 18px; padding-top: 12px; border-top: 1px solid #dbe6ff; }
+  h3 { font-size: 24px; letter-spacing:-0.025em; margin: 42px 0 14px; }
+  p { font-size: 17px; margin: 10px 0; }
+  .tldr { background:#eaf3ff; border:1px solid #cfe0ff; border-left:6px solid var(--blue); padding:18px 22px; border-radius:18px; box-shadow: 0 8px 30px rgba(45,107,255,.08); }
+  .bullet { padding-left: 8px; color:#1b2440; }
+  .caption { color:#3e485a; margin-top: -4px; }
+  .source { color:var(--muted); font-size:14px; margin-top:-4px; word-break: break-all; }
+  a { color:var(--blue); text-decoration:none; }
+  a:hover { text-decoration:underline; }
+  figure { margin: 24px 0 8px; background:var(--card); border:1px solid #e4e9f5; border-radius:22px; padding:14px; box-shadow:0 16px 42px rgba(15,23,42,.10); }
+  figure img { display:block; width:100%; max-height:620px; object-fit:contain; border-radius:14px; background:#fff; }
+  figcaption { font-size:13px; color:var(--muted); padding:10px 4px 0; }
+  pre { background:#0b1020; color:#dbeafe; padding:20px; border-radius:18px; overflow:auto; box-shadow:inset 0 0 0 1px rgba(255,255,255,.08); }
+  code { font-family:'SFMono-Regular','Consolas','Liberation Mono',monospace; font-size:14px; line-height:1.35; }
+  hr { border:0; border-top:1px solid #dbe6ff; margin:48px 0; }
+  strong { color:#0b1020; }
+</style>
+</head>
+<body><main><h1>Quick References: AI Motivation Slide Design</h1><h2>TL;DR</h2><div class="tldr"><p>고등학생 대상 20분 발표에는 “깨끗한 교육 톤 + 순간적으로 몰입시키는 다크 테크 키노트 + 개인 성장 스토리 타임라인” 조합이 가장 잘 맞습니다. 슬라이드는 예쁘기보다 한 장에 한 메시지, 큰 글자, 카드형 요약, 사진/비유 중심으로 가는 것이 좋습니다.</p></div><h2>Patterns</h2><h3>추천 방향: “따뜻한 교육 × AI 키노트 × 개인 성장담”</h3><p class="bullet">• **기본 톤:** 밝은 배경, 넓은 여백, 큰 한글 타이틀, 파란/보라 계열 포인트.</p><p class="bullet">• **AI/컴퓨터비전 설명 파트:** 2~3장 정도만 다크 배경으로 전환해서 “기술자/연구자” 분위기를 준다.</p><p class="bullet">• **편입 계기와 공부 동기 파트:** 사진보다 **타임라인/계단/전환점 카드**가 좋다. 너무 감정적으로 과장하지 않고, “내 위치가 끝은 아니었다”는 메시지로 정리.</p><p class="bullet">• **고등학생 대상:** 전문성보다 이해와 몰입이 우선. 표/논문식 슬라이드보다 “질문 → 사례 → 한 문장 결론” 구조가 낫다.</p><h3>Deck system proposal</h3><pre><code>16:9 / Noto Sans KR or Pretendard
+
+Backgrounds
+- Main: #F7FAFF / #FFFFFF
+- Tech section: #070B18 / #0B1020
+
+Accent
+- AI blue: #2D6BFF
+- Vision purple: #8B5CF6
+- Motivation orange: #F97316
+
+Rules
+- 1 slide = 1 message
+- Title 44~64px, body 24~32px
+- 한 슬라이드 문장 3줄 이하
+- 도표보다 카드, 카드보다 한 문장</code></pre><h3>Suggested slide archetypes</h3><p class="caption"><em>1) Opening question slide</em></p><pre><code>┌────────────────────────────────────────────┐
+│                                            │
+│  여러분은 오늘 AI를                        │
+│  몇 번 만났을까요?                         │
+│                                            │
+│  YouTube · 카메라 · 번역 · 추천 · ChatGPT  │
+│                                            │
+└────────────────────────────────────────────┘</code></pre><p class="caption"><em>2) What I do slide</em></p><pre><code>┌────────────────────────────────────────────┐
+│  AI에게 눈을 만들어주는 일                 │
+│                                            │
+│  [Camera] → [Model] → [Experience]         │
+│   본다        이해한다       도움이 된다    │
+└────────────────────────────────────────────┘</code></pre><p class="caption"><em>3) Personal turning point slide</em></p><pre><code>┌────────────────────────────────────────────┐
+│  내 위치가 내 끝은 아니었다                │
+│                                            │
+│  지방 캠퍼스 ── Google 세미나 ── 편입 준비 │
+│      출발점          전환점          방향   │
+│                                            │
+│  “나를 당당하게 소개하고 싶었다”           │
+└────────────────────────────────────────────┘</code></pre><p class="caption"><em>4) Why study in the AI era slide</em></p><pre><code>┌────────────────────────────────────────────┐
+│  AI 시대에 공부가 필요한 이유              │
+│                                            │
+│  ┌────────┐ ┌────────┐ ┌────────┐         │
+│  │ 질문력 │ │ 판단력 │ │ 선택지 │         │
+│  └────────┘ └────────┘ └────────┘         │
+└────────────────────────────────────────────┘</code></pre><hr><h2>References</h2><h3>Pattern A: Warm education hero — 학생 눈높이에 맞는 “친근한 진입”</h3><figure><img src="references/lazyweb-microsoft-ai-education.png" alt="Microsoft AI Education"><figcaption>Microsoft AI Education</figcaption></figure><p>*Microsoft Education AI — 교육 AI를 영웅 영역, CTA, 카드 그리드, 스토리 섹션으로 풀어내는 구조. [Lazyweb]*  </p><p class="source">Source: <a href="https://www.microsoft.com/en-us/education/ai-in-education">https://www.microsoft.com/en-us/education/ai-in-education</a></p><figure><img src="references/lazyweb-apple-education-storytelling.png" alt="Apple Education Storytelling"><figcaption>Apple Education Storytelling</figcaption></figure><p>*Apple Education — 큰 이미지 타일과 짧은 문장으로 교육 이야기를 감성적으로 연결. [Lazyweb]*  </p><p class="source">Source: <a href="https://www.apple.com/education-initiative/">https://www.apple.com/education-initiative/</a></p><figure><img src="references/lazyweb-kahoot-education-energy.png" alt="Kahoot Education Energy"><figcaption>Kahoot Education Energy</figcaption></figure><p>*Kahoot — 교육 플랫폼답게 밝고 에너지 있는 색감, 학생 참여/몰입 느낌. [Lazyweb]*  </p><p class="source">Source: <a href="https://kahoot.com/schools/higher-ed/">https://kahoot.com/schools/higher-ed/</a></p><p>Use for this talk: 첫 2~3장은 밝고 친근하게 시작하세요. “AI가 이미 여러분 일상에 있다”는 메시지에는 Microsoft/Apple식 넓은 여백과 큰 질문형 타이틀이 잘 맞습니다.</p><pre><code>┌───────────────────────────────┐
+│  큰 질문형 헤드라인           │
+│  짧은 보조 문장               │
+│                               │
+│  [생활 속 AI 예시 카드 3개]   │
+└───────────────────────────────┘</code></pre><h3>Pattern B: Dark tech keynote — AI/컴퓨터비전 설명 파트의 몰입감</h3><figure><img src="references/lazyweb-github-spark-dark-ai.png" alt="GitHub Spark Dark AI"><figcaption>GitHub Spark Dark AI</figcaption></figure><p>*GitHub Spark — 다크 배경, 강한 헤드라인, 제품/기술 프리뷰로 미래지향적인 분위기. [Lazyweb]*  </p><p class="source">Source: <a href="https://github.com/features/spark">https://github.com/features/spark</a></p><figure><img src="references/lazyweb-linear-dark-product.png" alt="Linear Dark Product"><figcaption>Linear Dark Product</figcaption></figure><p>*Linear — 어두운 배경과 정교한 제품 UI 프리뷰로 “프로페셔널한 기술” 인상을 줌. [Lazyweb]*  </p><p class="source">Source: <a href="https://linear.app/">https://linear.app/</a></p><figure><img src="references/web-microsoft-ai-education.png" alt="Web Microsoft AI Education"><figcaption>Web Microsoft AI Education</figcaption></figure><p>*Microsoft AI Education 현재 웹 캡처 — 교육 맥락 안에서 AI를 신뢰감 있게 보여주는 페이지. [Web]*  </p><p class="source">Source: <a href="https://www.microsoft.com/en-us/education/ai-in-education">https://www.microsoft.com/en-us/education/ai-in-education</a></p><p>Use for this talk: “컴퓨터 비전 = AI에게 눈을 만들어주는 기술”을 설명할 때 한 번 분위기를 바꾸면 학생들이 집중합니다. 단, 전체를 다크로 만들면 무거워지므로 섹션 구분용으로만 쓰는 것이 좋습니다.</p><pre><code>┌───────────────────────────────┐
+│  DARK TECH SECTION            │
+│                               │
+│  카메라 = AI의 눈             │
+│  데이터 = AI의 교과서         │
+│  모델 = AI의 두뇌             │
+└───────────────────────────────┘</code></pre><h3>Pattern C: Learning/cards — 공부 메시지를 구조화하기</h3><figure><img src="references/lazyweb-codecademy-student-center.png" alt="Codecademy Student Center"><figcaption>Codecademy Student Center</figcaption></figure><p>*Codecademy Student Center — 학생 대상 학습 경로, 커리큘럼 카드, 커뮤니티/리소스 카드 구성. [Lazyweb]*  </p><p class="source">Source: <a href="https://www.codecademy.com/student-center">https://www.codecademy.com/student-center</a></p><figure><img src="references/lazyweb-github-education-journey.png" alt="GitHub Education Journey"><figcaption>GitHub Education Journey</figcaption></figure><p>*GitHub Education — 학생/교사/학교 등 대상을 나누고 여정을 시작하게 만드는 교육 랜딩 구조. [Lazyweb]*  </p><p class="source">Source: <a href="https://github.com/education">https://github.com/education</a></p><figure><img src="references/lazyweb-canva-design-school.png" alt="Canva Design School"><figcaption>Canva Design School</figcaption></figure><p>*Canva Design School — 검색/토픽/학습 카드 중심의 친근한 교육 허브. [Lazyweb]*  </p><p class="source">Source: <a href="https://www.canva.com/design-school">https://www.canva.com/design-school</a></p><p>Use for this talk: “AI 시대에도 공부가 필요한 이유 3가지”는 카드 3개로 끝내세요. 학생들이 메모 없이도 기억하기 쉽습니다.</p><pre><code>┌───────────────────────────────┐
+│  공부는 정답 암기가 아니라... │
+│                               │
+│  ┌───────┐ ┌───────┐ ┌───────┐│
+│  │질문력 │ │판단력 │ │선택지 ││
+│  │AI에게 │ │AI 답을│ │미래의 ││
+│  │묻는 힘│ │검증함│ │길을 엶││
+│  └───────┘ └───────┘ └───────┘│
+└───────────────────────────────┘</code></pre><h3>Pattern D: Lecture/webinar credibility — “내가 하는 일”을 과하지 않게 보여주기</h3><figure><img src="references/lazyweb-glean-webinar.png" alt="Glean Webinar"><figcaption>Glean Webinar</figcaption></figure><p>*Glean Webinar — 강연/웨비나형 구조: 주제, 발표자, 개요, CTA가 명확. [Lazyweb]*  </p><p class="source">Source: <a href="https://www.glean.com/webinars/ai-powered-engineering">https://www.glean.com/webinars/ai-powered-engineering</a></p><figure><img src="references/lazyweb-workday-ai-masterclass.png" alt="Workday AI Masterclass"><figcaption>Workday AI Masterclass</figcaption></figure><p>*Workday AI Masterclass — 영상/강좌/모듈 카드로 AI 강연을 전문적으로 포장. [Lazyweb]*  </p><p class="source">Source: <a href="https://www.workday.com/en-us/artificial-intelligence/ai-masterclass.html">https://www.workday.com/en-us/artificial-intelligence/ai-masterclass.html</a></p><figure><img src="references/lazyweb-openai-startups.png" alt="OpenAI Startups"><figcaption>OpenAI Startups</figcaption></figure><p>*OpenAI Startups — 커뮤니티/리소스 카드와 큰 메시지로 AI 생태계를 설명. [Lazyweb]*  </p><p class="source">Source: <a href="https://openai.com/startups/">https://openai.com/startups/</a></p><p>Use for this talk: 경력 소개는 1장으로 충분합니다. 학교/회사 로고를 나열하기보다 “무엇을 만드는 사람인가”를 중심에 두세요.</p><pre><code>┌───────────────────────────────┐
+│  저는 이런 일을 합니다        │
+│                               │
+│  AI Research  →  Product  →  Experience
+│  연구 성능        제품화        사람이 체감
+│                               │
+│  성균관대 · 서울대 · 삼성전자  │
+└───────────────────────────────┘</code></pre><h3>Pattern E: One-message title slide — 기억에 남는 문장 하나</h3><figure><img src="references/lazyweb-max-batt-ai-report-title.png" alt="AI Report Card Title"><figcaption>AI Report Card Title</figcaption></figure><p>*AI Report Card — 거의 한 문장만으로 만드는 극단적으로 단순한 제목 슬라이드. [Lazyweb]*  </p><p class="source">Source: <a href="https://maxbatt.com/ai-report-card/">https://maxbatt.com/ai-report-card/</a></p><figure><img src="references/web-beautiful-ai-trends.png" alt="Beautiful.ai Trends"><figcaption>Beautiful.ai Trends</figcaption></figure><p>*Beautiful.ai presentation trends — 발표 디자인 트렌드 글의 히어로/콘텐츠 구조. [Web]*  </p><p class="source">Source: <a href="https://www.beautiful.ai/blog/ai-presentation-trends-2026">https://www.beautiful.ai/blog/ai-presentation-trends-2026</a></p><p>Use for this talk: 핵심 메시지는 “한 문장 슬라이드”로 따로 빼는 게 좋습니다. 특히 편입 계기 뒤에 아래 문장만 크게 보여주면 효과적입니다.</p><pre><code>┌───────────────────────────────┐
+│                               │
+│  지금 내 위치가               │
+│  내 끝은 아니다               │
+│                               │
+└───────────────────────────────┘</code></pre><h3>Pattern F: Current web captures — 실제 최신 웹 톤 확인용</h3><figure><img src="references/web-apple-education.png" alt="Apple Education Web"><figcaption>Apple Education Web</figcaption></figure><p>*Apple Education 현재 웹 캡처 — 대상별 카드와 스토리 피드. [Web]*  </p><p class="source">Source: <a href="https://www.apple.com/education/">https://www.apple.com/education/</a></p><figure><img src="references/web-github-education.png" alt="GitHub Education Web"><figcaption>GitHub Education Web</figcaption></figure><p>*GitHub Education 현재 웹 캡처 — 개발자 교육/커뮤니티/여정 시작 메시지. [Web]*  </p><p class="source">Source: <a href="https://github.com/education">https://github.com/education</a></p><figure><img src="references/web-canva-design-school.png" alt="Canva Design School Web"><figcaption>Canva Design School Web</figcaption></figure><p>*Canva Design School 현재 웹 캡처 — 밝고 쉬운 디자인 학습 허브. [Web]*  </p><p class="source">Source: <a href="https://www.canva.com/design-school/">https://www.canva.com/design-school/</a></p><p>Use for this talk: 마지막 조언 파트는 밝은 웹 캡처들처럼 가볍게 마무리하세요. “질문하기, 만들어보기, 기록하기”를 카드로 정리하면 학생들이 바로 가져갈 수 있습니다.</p><hr><h2>Recommended direction for your slide deck</h2><h3>Best-fit visual concept</h3><p>“좋은 선배가 들려주는 AI 시대 공부 이야기”  </p><p>너무 기업 강연처럼 딱딱하지 않고, 너무 감성 강연처럼 보이지도 않게, 신뢰감 있는 기술자 + 진심 있는 성장담의 균형을 잡는 디자인이 좋습니다.</p><h3>Proposed 10-slide structure</h3><p>1. Title: AI가 공부를 대신해주는 시대, 우리는 왜 공부해야 할까?</p><p>2. Opening question: 오늘 AI를 몇 번 만났을까?</p><p>3. Who I am: AI를 사람의 경험으로 바꾸는 일을 합니다</p><p>4. Computer vision: AI에게 눈을 만들어주는 기술</p><p>5. Turning point: 지금 내 위치가 내 끝은 아니었다</p><p>6. Study reason 1: 좋은 질문을 하려면 내가 알아야 한다</p><p>7. Study reason 2: AI의 답을 판단하려면 기준이 필요하다</p><p>8. Study reason 3: 공부는 선택지를 넓히는 일이다</p><p>9. Try this: 질문하기 · 만들어보기 · 기록하기</p><p>10. Closing: AI를 쓰는 사람이 되려면, 먼저 나만의 기준을 만들어야 한다</p><h3>What to avoid</h3><p class="bullet">• 너무 많은 이력 나열: 학생들은 “대단한 사람”보다 “바뀐 사람”에게 반응합니다.</p><p class="bullet">• 논문/성능지표 과다: 컴퓨터비전은 비유로 충분합니다.</p><p class="bullet">• 모든 슬라이드를 다크 테마로 만들기: 고등학생 대상 동기부여에는 무겁습니다.</p><p class="bullet">• 한 장에 문장 5개 이상: 발표자는 말로 설명하고, 슬라이드는 기억할 문장만 남기세요.</p></main></body>
+</html>
