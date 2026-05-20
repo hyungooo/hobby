@@ -116,22 +116,23 @@
   .source-note{position:absolute;left:82px;right:82px;bottom:78px;border-top:1px solid rgba(255,255,255,.12);padding-top:18px;font-size:16px;color:#9eb0df;line-height:1.5}
   .progress{position:fixed;left:0;bottom:0;height:5px;background:linear-gradient(90deg,var(--blue),var(--purple),var(--orange));width:0%;z-index:10;transition:width .25s ease}.nav{position:fixed;right:22px;bottom:18px;display:flex;gap:8px;z-index:11;opacity:0;transition:opacity .18s ease}.nav button{border:0;border-radius:999px;padding:10px 14px;font-weight:900;background:rgba(255,255,255,.88);color:#111827;box-shadow:0 8px 24px rgba(0,0,0,.18);cursor:pointer}.help{display:none}
 
-  @keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
-  @keyframes fadeLeft{from{opacity:0;transform:translateX(-28px)}to{opacity:1;transform:translateX(0)}}
-  @keyframes fadeRight{from{opacity:0;transform:translateX(28px)}to{opacity:1;transform:translateX(0)}}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(46px)}to{opacity:1;transform:translateY(0)}}
+  @keyframes fadeLeft{from{opacity:0;transform:translateX(-46px)}to{opacity:1;transform:translateX(0)}}
+  @keyframes fadeRight{from{opacity:0;transform:translateX(46px)}to{opacity:1;transform:translateX(0)}}
   @keyframes popIn{0%{opacity:0;transform:scale(.92)}70%{transform:scale(1.025)}100%{opacity:1;transform:scale(1)}}
   @keyframes gradientFlow{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
   .accent{background-size:220% 220%;animation:gradientFlow 5.5s ease infinite;}
-  .slide.active .eyebrow{animation:fadeLeft .52s cubic-bezier(.2,.8,.2,1) both;}
-  .slide.active h1,.slide.active h2,.slide.active .huge{animation:fadeUp .66s cubic-bezier(.2,.8,.2,1) .06s both;}
-  .slide.active .title-sub,.slide.active > p,.slide.active .message p{animation:fadeUp .58s cubic-bezier(.2,.8,.2,1) .18s both;}
-  .slide.active .orb-wrap,.slide.active .phone,.slide.active .warning-sign{animation:popIn .72s cubic-bezier(.2,.8,.2,1) .18s both;}
-  .slide.active .tile,.slide.active .badge,.slide.active .card,.slide.active .pipe-card,.slide.active .t-step,.slide.active .compare,.slide.active .check,.slide.active .door,.slide.active .action,.slide.active .formula-card{animation:fadeUp .58s cubic-bezier(.2,.8,.2,1) both;}
+  .slide.active .eyebrow{animation:fadeLeft .75s cubic-bezier(.16,1,.3,1) both;}
+  .slide.active h1,.slide.active h2,.slide.active .huge{animation:fadeUp .9s cubic-bezier(.16,1,.3,1) .08s both;}
+  .slide.active .title-sub,.slide.active > p,.slide.active .message p{animation:fadeUp .78s cubic-bezier(.16,1,.3,1) .24s both;}
+  .slide.active .orb-wrap,.slide.active .phone,.slide.active .warning-sign{animation:popIn .92s cubic-bezier(.16,1,.3,1) .22s both;}
+  .slide.active .tile,.slide.active .badge,.slide.active .card,.slide.active .pipe-card,.slide.active .t-step,.slide.active .compare,.slide.active .check,.slide.active .door,.slide.active .action,.slide.active .formula-card{animation:fadeUp .78s cubic-bezier(.16,1,.3,1) both;}
   .slide.active .tile:nth-child(1),.slide.active .badge:nth-child(1),.slide.active .card:nth-child(1),.slide.active .pipe-card:nth-child(1),.slide.active .t-step:nth-child(1),.slide.active .check:nth-child(1),.slide.active .door:nth-child(1),.slide.active .action:nth-child(1),.slide.active .formula-card:nth-child(1){animation-delay:.12s}
   .slide.active .tile:nth-child(2),.slide.active .badge:nth-child(2),.slide.active .card:nth-child(2),.slide.active .pipe-card:nth-child(2),.slide.active .t-step:nth-child(2),.slide.active .compare:nth-child(2),.slide.active .check:nth-child(2),.slide.active .door:nth-child(2),.slide.active .action:nth-child(2),.slide.active .formula-card:nth-child(3){animation-delay:.22s}
   .slide.active .tile:nth-child(3),.slide.active .badge:nth-child(3),.slide.active .card:nth-child(3),.slide.active .pipe-card:nth-child(3),.slide.active .t-step:nth-child(3),.slide.active .check:nth-child(3),.slide.active .door:nth-child(3),.slide.active .action:nth-child(3){animation-delay:.32s}
   .slide.active .tile:nth-child(4),.slide.active .t-step:nth-child(4),.slide.active .door:nth-child(4){animation-delay:.42s}
-  .slide.active .prompt-card,.slide.active .quote-box{animation:fadeUp .62s cubic-bezier(.2,.8,.2,1) .34s both;}
+  .slide.active .prompt-card,.slide.active .quote-box{animation:fadeUp .84s cubic-bezier(.16,1,.3,1) .42s both;}
+  .slide.active .number-cloud{animation:fadeRight 1.05s cubic-bezier(.16,1,.3,1) .18s both;}
   @media (prefers-reduced-motion: reduce){*,*:before,*:after{animation:none!important;transition:none!important}}
 
   @media print{
@@ -161,25 +162,21 @@
   <section class="slide light">
     <div class="question-grid">
       <div>
-        <div class="eyebrow">Opening Question</div>
-        <h2>여러분은 오늘<br/><span class="accent">AI를 몇 번</span><br/>만났을까요?</h2>
-        <p style="margin-top:26px;max-width:680px">AI는 미래 이야기가 아니라 이미 오늘 아침부터 여러분 옆에 있었습니다.</p>
+        <div class="eyebrow">Why This Matters</div>
+        <h2>AI는 이제<br/>특별한 기술이 아니라<br/><span class="accent">기본 도구</span>가 됩니다</h2>
+        <p style="margin-top:26px;max-width:700px">여러분이 대학에 가고 일을 시작할 때쯤에는, AI를 쓰는 능력이 지금의 검색 능력처럼 당연해질 가능성이 큽니다.</p>
       </div>
       <div>
-        <div class="ai-list">
-          <div class="tile"><span class="icon">🎬</span><strong>유튜브 추천</strong><span>무엇을 볼지 예측</span></div>
-          <div class="tile"><span class="icon">📷</span><strong>휴대폰 카메라</strong><span>얼굴·장면 인식</span></div>
-          <div class="tile"><span class="icon">🌐</span><strong>번역기</strong><span>언어를 이해</span></div>
-          <div class="tile"><span class="icon">💬</span><strong>챗봇</strong><span>질문에 답함</span></div>
+        <div class="card-grid" style="grid-template-columns:1fr 1fr;margin-top:0">
+          <div class="card"><div class="num">01</div><h3>정보 찾기</h3><p>검색에서 대화형 질문으로</p></div>
+          <div class="card"><div class="num">02</div><h3>글쓰기</h3><p>초안 작성과 피드백을 함께</p></div>
+          <div class="card"><div class="num">03</div><h3>코딩</h3><p>아이디어를 빠르게 실험</p></div>
+          <div class="card"><div class="num">04</div><h3>공부</h3><p>나만의 튜터처럼 활용</p></div>
         </div>
-        <div class="poll">
-          <h3>손 들어보기</h3>
-          <p>오늘 AI를 만난 횟수는?</p>
-          <div class="poll-options"><div>0</div><div>5+</div><div>10+</div></div>
-        </div>
+        <div class="quote-box" style="margin-top:28px"><p>문제는 “AI가 있느냐”가 아니라<br/>“내가 AI를 어떻게 쓰느냐”입니다.</p></div>
       </div>
     </div>
-    <div class="footer">학생 참여로 시작하기</div><div class="slide-no">02</div>
+    <div class="footer">AI는 선택 과목이 아니라 기본 도구가 되는 중</div><div class="slide-no">02</div>
   </section>
 
   <section class="slide soft">
@@ -211,20 +208,21 @@
     <div class="footer">LLM = 말을 다루는 AI의 기본 원리</div><div class="slide-no">04</div>
   </section>
 
-  <section class="slide light">
-    <div class="phone-layout">
-      <div class="phone"><div class="screen"><div class="screen-title">AI Experience</div><div class="screen-card"><div class="scan">💬</div><div class="bar" style="width:92%"></div><div class="bar" style="width:72%"></div><div class="bar" style="width:56%"></div></div><div class="screen-card"><b style="font-size:18px">Context understood</b><p style="font-size:17px;margin-top:6px;color:#64748b">상황에 맞는 도움을 제공</p></div></div></div>
-      <div>
-        <div class="eyebrow">AX: AI Experience</div>
-        <h2>좋은 AI는<br/>“똑똑하다”에서 끝나지 않고<br/><span class="accent">도움이 된다</span></h2>
-        <div class="card-grid" style="grid-template-columns:1fr 1fr;margin-top:38px">
-          <div class="card"><div class="num">01</div><h3>정확함</h3><p>AI가 상황을 잘 이해해야 합니다.</p></div>
-          <div class="card"><div class="num">02</div><h3>빠름</h3><p>제품 안에서는 기다림도 성능입니다.</p></div>
-          <div class="card big-card"><div class="num">03</div><h3>사람에게 자연스러움</h3><p>기술이 아니라 경험으로 느껴져야 합니다.</p></div>
-        </div>
+  <section class="slide soft">
+    <div class="eyebrow">The Real Difference</div>
+    <h2>AI가 모두에게 주어져도<br/>결과가 같지는 않습니다</h2>
+    <div class="split" style="margin-top:54px">
+      <div class="compare">
+        <h3>AI에 끌려가는 사람</h3>
+        <ul><li>아무 질문이나 한다</li><li>나온 답을 그대로 믿는다</li><li>왜 맞는지 설명하지 못한다</li></ul>
+      </div>
+      <div class="compare dark-box">
+        <h3>AI를 도구로 쓰는 사람</h3>
+        <ul><li>문제를 정확히 묻는다</li><li>답을 검증하고 고친다</li><li>내 목표에 맞게 적용한다</li></ul>
       </div>
     </div>
-    <div class="footer">기술 → 제품 → 경험</div><div class="slide-no">05</div>
+    <div class="quote-box"><p>그래서 공부는 AI에게 대체되는 것이 아니라,<br/>AI를 제대로 쓰기 위한 기본기가 됩니다.</p></div>
+    <div class="footer">p5의 역할: 기술 설명에서 공부 동기부여로 연결</div><div class="slide-no">05</div>
   </section>
 
   <section class="slide soft">
@@ -359,7 +357,10 @@
   let idx=Math.min(Math.max(parseInt(location.hash.replace('#','')||'1',10)-1,0),slides.length-1);
   function show(i){
     idx=(i+slides.length)%slides.length;
-    slides.forEach((s,n)=>s.classList.toggle('active',n===idx));
+    slides.forEach(s=>s.classList.remove('active'));
+    // Force a reflow so CSS entrance animations replay even when opened as a local file.
+    void deck.offsetWidth;
+    slides[idx].classList.add('active');
     progress.style.width=((idx+1)/slides.length*100)+'%';
     history.replaceState(null,'','#'+(idx+1));
   }
