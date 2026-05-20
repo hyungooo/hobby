@@ -1,0 +1,363 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>AI가 공부를 대신해주는 시대, 우리는 왜 공부해야 할까?</title>
+<style>
+  :root{
+    --ink:#07111f;
+    --muted:#5d6b82;
+    --blue:#2f6bff;
+    --blue2:#00b8ff;
+    --purple:#8b5cf6;
+    --orange:#ff7a1a;
+    --yellow:#ffd166;
+    --mint:#16db93;
+    --paper:#f8fbff;
+    --line:#dbe7ff;
+    --dark:#060917;
+    --dark2:#0b1228;
+    --card:#ffffff;
+    --shadow: 0 28px 70px rgba(22, 37, 71, .16);
+    --radius: 34px;
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%;margin:0;overflow:hidden;background:#101828;color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",sans-serif;}
+  body{display:grid;place-items:center;}
+  .deck{position:relative;width:min(100vw,177.7778vh);height:min(56.25vw,100vh);background:#fff;box-shadow:0 30px 120px rgba(0,0,0,.45);overflow:hidden;}
+  .slide{position:absolute;inset:0;padding:68px 82px;display:none;overflow:hidden;}
+  .slide.active{display:block;}
+  .light{background:
+    radial-gradient(circle at 82% 18%, rgba(47,107,255,.18), transparent 34%),
+    radial-gradient(circle at 15% 85%, rgba(139,92,246,.12), transparent 36%),
+    linear-gradient(135deg,#fbfdff 0%,#eef6ff 100%);}
+  .soft{background:
+    radial-gradient(circle at 78% 15%, rgba(255,122,26,.13), transparent 30%),
+    radial-gradient(circle at 18% 88%, rgba(47,107,255,.12), transparent 32%),
+    #fbfcff;}
+  .dark{color:#f8fbff;background:
+    radial-gradient(circle at 76% 18%, rgba(0,184,255,.28), transparent 32%),
+    radial-gradient(circle at 17% 75%, rgba(139,92,246,.22), transparent 38%),
+    linear-gradient(135deg,#040713 0%,#0b1430 58%,#090b18 100%);}
+  .dark .eyebrow,.dark .muted,.dark .footer,.dark .slide-no{color:#aebbea}
+  .dark .card,.dark .glass{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.16);color:#f8fbff;box-shadow:none;backdrop-filter:blur(18px)}
+  .dark .card p,.dark .glass p{color:#cbd7ff}
+  .focus{text-align:center;background:#fbfcff;}
+  .slide.focus.active{display:grid;place-items:center;}
+  h1,h2,h3,p{margin:0}
+  h1{font-size:76px;line-height:1.04;letter-spacing:-.065em;font-weight:900;}
+  h2{font-size:66px;line-height:1.06;letter-spacing:-.06em;font-weight:900;}
+  h3{font-size:34px;line-height:1.18;letter-spacing:-.035em;font-weight:850;}
+  p{font-size:27px;line-height:1.45;letter-spacing:-.025em;color:#243349;}
+  .dark p{color:#dce6ff}
+  .eyebrow{font-size:22px;font-weight:850;letter-spacing:.03em;text-transform:uppercase;color:var(--blue);margin-bottom:22px;display:flex;align-items:center;gap:12px;}
+  .eyebrow:before{content:"";width:13px;height:13px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--purple));box-shadow:0 0 0 8px rgba(47,107,255,.10)}
+  .muted{color:var(--muted)}
+  .accent{background:linear-gradient(90deg,var(--blue),var(--purple));-webkit-background-clip:text;background-clip:text;color:transparent;}
+  .orange{color:var(--orange)}
+  .blue{color:var(--blue)}
+  .big{font-size:96px;line-height:1.02;letter-spacing:-.075em;font-weight:950;}
+  .huge{font-size:116px;line-height:.98;letter-spacing:-.08em;font-weight:950;}
+  .kicker{font-size:24px;color:var(--muted);font-weight:750;letter-spacing:-.02em;}
+  .footer{position:absolute;left:82px;bottom:44px;font-size:17px;color:#7b879a;font-weight:700;letter-spacing:-.01em;}
+  .slide-no{position:absolute;right:82px;bottom:44px;font-size:17px;color:#8b96aa;font-weight:800;}
+  .title-layout{display:grid;grid-template-columns:1.08fr .92fr;align-items:center;height:100%;gap:44px;}
+  .title-sub{margin-top:30px;font-size:31px;color:#334155;max-width:770px;}
+  .chips{display:flex;gap:14px;flex-wrap:wrap;margin-top:34px;}
+  .chip{display:inline-flex;align-items:center;gap:9px;padding:13px 18px;border-radius:999px;background:rgba(255,255,255,.78);border:1px solid rgba(47,107,255,.13);font-size:19px;font-weight:800;color:#243349;box-shadow:0 10px 30px rgba(30,64,175,.07)}
+  .orb-wrap{position:relative;height:640px;display:grid;place-items:center;}
+  .orb{width:430px;height:430px;border-radius:50%;background:
+    radial-gradient(circle at 35% 28%,#fff 0 7%,rgba(255,255,255,.8) 8% 13%,transparent 14%),
+    radial-gradient(circle at 68% 70%,rgba(255,209,102,.9),transparent 20%),
+    radial-gradient(circle at 30% 75%,rgba(0,184,255,.95),transparent 26%),
+    linear-gradient(135deg,#2f6bff,#8b5cf6 48%,#ff7a1a 100%);
+    filter:drop-shadow(0 40px 70px rgba(47,107,255,.25));animation:float 5s ease-in-out infinite;}
+  .orbit{position:absolute;border:2px solid rgba(47,107,255,.19);border-radius:50%;}
+  .orbit.one{width:560px;height:260px;transform:rotate(-24deg)}
+  .orbit.two{width:520px;height:520px;border-color:rgba(139,92,246,.15)}
+  .spark{position:absolute;width:18px;height:18px;border-radius:50%;background:var(--orange);box-shadow:0 0 40px var(--orange)}
+  .spark.s1{right:145px;top:130px}.spark.s2{left:112px;bottom:170px;background:var(--blue2)}.spark.s3{right:190px;bottom:98px;background:var(--mint)}
+  @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-18px)}}
+  .question-grid{height:100%;display:grid;grid-template-columns:1fr 1fr;gap:54px;align-items:center;}
+  .ai-list{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+  .tile{min-height:146px;border-radius:30px;padding:26px;background:#fff;border:1px solid #e2ebff;box-shadow:var(--shadow);display:flex;flex-direction:column;justify-content:space-between;}
+  .tile .icon{font-size:42px}.tile strong{font-size:25px;letter-spacing:-.035em}.tile span{font-size:19px;color:#64748b;font-weight:700}
+  .poll{border-radius:40px;background:#07111f;color:#fff;padding:44px;box-shadow:0 32px 80px rgba(7,17,31,.28);}
+  .poll h3{font-size:44px;margin-bottom:24px}.poll p{color:#cbd5e1}.poll-options{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:28px}.poll-options div{border:1px solid rgba(255,255,255,.14);border-radius:24px;padding:25px;text-align:center;font-size:38px;font-weight:900;background:rgba(255,255,255,.07)}
+  .profile-map{display:grid;grid-template-columns:.92fr 1.08fr;gap:42px;align-items:center;height:100%;}
+  .badge-stack{display:flex;flex-direction:column;gap:18px;}
+  .badge{background:#fff;border:1px solid #e0e9ff;border-radius:28px;padding:23px 26px;box-shadow:0 18px 48px rgba(30,64,175,.09);}
+  .badge small{display:block;font-size:17px;font-weight:850;color:var(--blue);margin-bottom:7px;letter-spacing:.02em}.badge b{font-size:27px;letter-spacing:-.035em}.badge p{font-size:20px;color:#64748b;margin-top:6px}
+  .career-card{position:relative;border-radius:46px;background:#07111f;color:#fff;padding:46px;min-height:610px;overflow:hidden;box-shadow:0 35px 90px rgba(7,17,31,.26);}
+  .career-card:after{content:"";position:absolute;right:-80px;bottom:-95px;width:340px;height:340px;border-radius:50%;background:radial-gradient(circle,rgba(47,107,255,.85),rgba(139,92,246,.5),transparent 68%)}
+  .career-card h3{font-size:52px}.career-card p{color:#dbeafe;font-size:27px;margin-top:22px}.career-list{position:relative;z-index:1;display:grid;gap:16px;margin-top:42px}.career-list div{display:flex;gap:15px;align-items:center;font-size:25px;font-weight:850}.career-list div:before{content:"→";display:grid;place-items:center;width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.12);color:#93c5fd}
+  .pipeline{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;align-items:stretch;margin-top:54px;}
+  .pipe-card{position:relative;border-radius:34px;padding:34px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);min-height:285px;}
+  .pipe-card .emoji{font-size:58px;margin-bottom:22px}.pipe-card h3{font-size:34px}.pipe-card p{font-size:22px;margin-top:15px;color:#cbd7ff}.arrow{position:absolute;right:-25px;top:50%;transform:translateY(-50%);font-size:42px;color:#86b7ff;z-index:2}.pipeline .pipe-card:last-child .arrow{display:none}
+  .number-cloud{position:absolute;right:80px;top:90px;width:480px;height:420px;opacity:.17;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:26px;line-height:1.25;color:#fff;transform:rotate(-7deg)}
+  .phone-layout{display:grid;grid-template-columns:.9fr 1.1fr;gap:56px;align-items:center;height:100%;}
+  .phone{width:330px;height:650px;border-radius:58px;background:#08111f;border:12px solid #172033;box-shadow:0 42px 90px rgba(8,17,31,.32);margin:auto;padding:28px;position:relative;}
+  .phone:before{content:"";position:absolute;top:15px;left:50%;transform:translateX(-50%);width:96px;height:24px;background:#0f172a;border-radius:999px}.screen{height:100%;border-radius:40px;background:linear-gradient(180deg,#ecf8ff,#fff);padding:32px 22px;overflow:hidden}.screen-title{font-size:24px;font-weight:900;letter-spacing:-.04em}.screen-card{margin-top:22px;border-radius:26px;background:#fff;padding:20px;box-shadow:0 12px 32px rgba(15,23,42,.12)}.screen-card .bar{height:12px;border-radius:99px;background:#dbeafe;margin:9px 0}.scan{height:160px;border-radius:26px;background:linear-gradient(135deg,#dbeafe,#f5d0fe);display:grid;place-items:center;font-size:58px;position:relative;overflow:hidden}.scan:after{content:"";position:absolute;left:0;right:0;height:4px;background:#22d3ee;box-shadow:0 0 22px #22d3ee;animation:scan 2.2s linear infinite}@keyframes scan{0%{top:18px}100%{top:132px}}
+  .card-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:48px}.card{border-radius:32px;background:#fff;border:1px solid #e2ebff;padding:30px;box-shadow:var(--shadow)}.card .num{font-size:18px;font-weight:950;color:var(--blue);margin-bottom:18px}.card h3{font-size:31px}.card p{font-size:22px;color:#58657a;margin-top:14px}.card.big-card{grid-column:span 2}
+  .timeline{position:relative;display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:60px}.timeline:before{content:"";position:absolute;left:9%;right:9%;top:52px;height:4px;border-radius:99px;background:linear-gradient(90deg,#c7d2fe,var(--blue),var(--orange));}.t-step{position:relative;border-radius:30px;background:#fff;border:1px solid #e3ebff;padding:86px 24px 28px;box-shadow:0 18px 50px rgba(30,64,175,.09);min-height:250px}.t-dot{position:absolute;top:32px;left:26px;width:42px;height:42px;border-radius:50%;background:#fff;border:10px solid var(--blue);box-shadow:0 0 0 8px rgba(47,107,255,.12)}.t-step:nth-child(3) .t-dot{border-color:var(--orange)}.t-step small{font-size:16px;color:#64748b;font-weight:900}.t-step h3{font-size:27px;margin-top:8px}.t-step p{font-size:19px;color:#64748b;margin-top:10px}.quote-box{margin-top:50px;border-radius:36px;padding:38px;background:#07111f;color:#fff;box-shadow:0 24px 70px rgba(7,17,31,.22)}.quote-box p{color:#e0edff;font-size:34px;font-weight:850;letter-spacing:-.04em}
+  .split{display:grid;grid-template-columns:1fr 1fr;gap:36px;align-items:stretch;margin-top:46px}.compare{border-radius:36px;padding:42px;background:#fff;border:1px solid #e2ebff;box-shadow:var(--shadow)}.compare.dark-box{background:#07111f;color:#fff}.compare h3{font-size:38px}.compare ul{padding:0;margin:30px 0 0;list-style:none}.compare li{font-size:26px;font-weight:800;letter-spacing:-.035em;margin:18px 0;display:flex;gap:14px;align-items:center}.compare li:before{content:"";width:13px;height:13px;border-radius:50%;background:var(--blue)}.dark-box li:before{background:var(--orange)}
+  .prompt-card{border-radius:36px;background:#07111f;color:#fff;padding:38px;margin-top:42px;box-shadow:0 30px 80px rgba(7,17,31,.26)}.prompt{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:23px;line-height:1.55;color:#b7c9ff}.prompt strong{color:#fff}.prompt .bad{color:#fca5a5}.prompt .good{color:#86efac}
+  .warning-grid{display:grid;grid-template-columns:.95fr 1.05fr;gap:38px;margin-top:52px;align-items:center}.warning-sign{height:420px;border-radius:42px;background:#07111f;display:grid;place-items:center;box-shadow:0 30px 80px rgba(7,17,31,.24);position:relative;overflow:hidden}.warning-sign:before{content:"!";font-size:210px;font-weight:950;color:#ffd166;text-shadow:0 0 45px rgba(255,209,102,.45)}.warning-sign:after{content:"그럴듯한 틀림";position:absolute;bottom:55px;font-size:36px;font-weight:900;color:#fff}.checklist{display:grid;gap:16px}.check{display:flex;gap:18px;align-items:flex-start;border-radius:26px;background:#fff;border:1px solid #e2ebff;padding:25px;box-shadow:0 14px 36px rgba(30,64,175,.08)}.check b{font-size:25px}.check p{font-size:20px;color:#64748b;margin-top:5px}.check:before{content:"✓";display:grid;place-items:center;flex:none;width:38px;height:38px;border-radius:50%;background:#dcfce7;color:#15803d;font-weight:950;font-size:23px}
+  .doors{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:58px}.door{height:300px;border-radius:32px;background:#fff;border:1px solid #e2ebff;box-shadow:var(--shadow);padding:28px;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden}.door:after{content:"";position:absolute;right:-50px;bottom:-55px;width:160px;height:160px;border-radius:50%;background:rgba(47,107,255,.12)}.door span{font-size:54px}.door b{font-size:28px;letter-spacing:-.04em}.door p{font-size:19px;color:#64748b}.door.locked{filter:grayscale(.3);opacity:.55}.door.locked:before{content:"LOCK";position:absolute;right:20px;top:20px;font-size:14px;font-weight:950;color:#94a3b8;border:1px solid #cbd5e1;border-radius:999px;padding:6px 10px;background:#f8fafc}
+  .action-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:56px}.action{min-height:420px;border-radius:38px;padding:38px;background:#fff;border:1px solid #e2ebff;box-shadow:var(--shadow);display:flex;flex-direction:column}.action .icon{font-size:66px}.action h3{font-size:40px;margin-top:24px}.action p{font-size:23px;color:#64748b;margin-top:16px}.action .example{margin-top:auto;border-radius:22px;background:#eff6ff;color:#1e40af;padding:18px;font-size:18px;font-weight:850;letter-spacing:-.02em}
+  .formula{display:grid;grid-template-columns:1fr auto 1fr;gap:32px;align-items:center;margin-top:68px}.formula-card{border-radius:38px;padding:42px;background:#fff;border:1px solid #e2ebff;box-shadow:var(--shadow);min-height:285px}.formula-card h3{font-size:43px}.formula-card p{font-size:24px;color:#64748b;margin-top:18px}.operator{font-size:70px;font-weight:950;color:var(--blue)}.growth-line{height:210px;margin-top:28px;border-left:5px solid #dbeafe;border-bottom:5px solid #dbeafe;position:relative;border-radius:0 0 0 8px}.growth-line:after{content:"";position:absolute;left:15px;bottom:12px;width:260px;height:130px;border-radius:100% 0 0 0;border-top:9px solid var(--orange);transform:skew(-18deg)}
+  .message{max-width:1120px}.message .huge{margin-bottom:34px}.message p{font-size:34px;color:#475569}.message .underline{display:inline-block;position:relative}.message .underline:after{content:"";position:absolute;left:0;right:0;bottom:4px;height:18px;border-radius:99px;background:rgba(255,122,26,.26);z-index:-1}
+  .final{color:#fff;text-align:left;background:
+    radial-gradient(circle at 80% 24%,rgba(255,122,26,.32),transparent 30%),
+    radial-gradient(circle at 26% 72%,rgba(47,107,255,.36),transparent 36%),
+    linear-gradient(135deg,#050713,#07152f 62%,#12071f);}
+  .final h2{font-size:86px}.final p{font-size:32px;color:#dce6ff;margin-top:26px;max-width:900px}.final .qa{position:absolute;right:82px;bottom:72px;font-size:150px;font-weight:950;letter-spacing:-.08em;color:rgba(255,255,255,.08)}
+  .source-note{position:absolute;left:82px;right:82px;bottom:78px;border-top:1px solid rgba(255,255,255,.12);padding-top:18px;font-size:16px;color:#9eb0df;line-height:1.5}
+  .progress{position:fixed;left:0;bottom:0;height:5px;background:linear-gradient(90deg,var(--blue),var(--purple),var(--orange));width:0%;z-index:10;transition:width .25s ease}.nav{position:fixed;right:22px;bottom:18px;display:flex;gap:8px;z-index:11;opacity:0;transition:opacity .18s ease}.nav button{border:0;border-radius:999px;padding:10px 14px;font-weight:900;background:rgba(255,255,255,.88);color:#111827;box-shadow:0 8px 24px rgba(0,0,0,.18);cursor:pointer}.help{display:none}
+  @media print{
+    html,body{height:auto;overflow:visible;background:#fff}.deck{width:100vw;height:auto;box-shadow:none;overflow:visible}.slide{display:block!important;position:relative;width:100vw;height:56.25vw;page-break-after:always}.progress,.nav,.help{display:none}.slide-no,.footer{display:none}
+  }
+</style>
+</head>
+<body>
+<div class="deck" id="deck">
+  <section class="slide light active">
+    <div class="title-layout">
+      <div>
+        <div class="eyebrow">AI × 공부 동기부여</div>
+        <h1>AI가 공부를<br/><span class="accent">대신해주는 시대</span>,<br/>우리는 왜 공부해야 할까?</h1>
+        <p class="title-sub">삼성전자 AI 연구원이 고등학생들에게 들려주는<br/>일, 전환점, 그리고 공부의 진짜 의미</p>
+        <div class="chips">
+          <div class="chip">🤖 AI</div><div class="chip">👁️ 컴퓨터 비전</div><div class="chip">🔥 동기부여</div><div class="chip">🧭 선택지</div>
+        </div>
+      </div>
+      <div class="orb-wrap">
+        <div class="orbit one"></div><div class="orbit two"></div><div class="orb"></div><div class="spark s1"></div><div class="spark s2"></div><div class="spark s3"></div>
+      </div>
+    </div>
+    <div class="slide-no">01</div>
+  </section>
+
+  <section class="slide light">
+    <div class="question-grid">
+      <div>
+        <div class="eyebrow">Opening Question</div>
+        <h2>여러분은 오늘<br/><span class="accent">AI를 몇 번</span><br/>만났을까요?</h2>
+        <p style="margin-top:26px;max-width:680px">AI는 미래 이야기가 아니라 이미 오늘 아침부터 여러분 옆에 있었습니다.</p>
+      </div>
+      <div>
+        <div class="ai-list">
+          <div class="tile"><span class="icon">🎬</span><strong>유튜브 추천</strong><span>무엇을 볼지 예측</span></div>
+          <div class="tile"><span class="icon">📷</span><strong>휴대폰 카메라</strong><span>얼굴·장면 인식</span></div>
+          <div class="tile"><span class="icon">🌐</span><strong>번역기</strong><span>언어를 이해</span></div>
+          <div class="tile"><span class="icon">💬</span><strong>챗봇</strong><span>질문에 답함</span></div>
+        </div>
+        <div class="poll">
+          <h3>손 들어보기</h3>
+          <p>오늘 AI를 만난 횟수는?</p>
+          <div class="poll-options"><div>0</div><div>5+</div><div>10+</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="footer">학생 참여로 시작하기</div><div class="slide-no">02</div>
+  </section>
+
+  <section class="slide soft">
+    <div class="profile-map">
+      <div>
+        <div class="eyebrow">Who I Am</div>
+        <h2>저는 AI를<br/><span class="accent">사람의 경험</span>으로<br/>바꾸는 일을 합니다</h2>
+        <p style="margin-top:28px">연구실의 알고리즘이 제품 속에서 “와, 편하다”가 되는 순간을 만드는 일.</p>
+      </div>
+      <div class="badge-stack">
+        <div class="badge"><small>STUDY</small><b>성균관대학교 소프트웨어학 학사 · 석사</b><p>그리고 서울대학교 공과대학 박사 과정에서 AI/컴퓨터 비전 연구</p></div>
+        <div class="badge"><small>WORK</small><b>삼성전자 DS부문 S.LSI사업부 AX 그룹</b><p>AI Experience를 제품과 사용자 경험으로 연결</p></div>
+        <div class="badge"><small>PROJECT</small><b>SmartThings Vision 개발 리드 · 기술 PM</b><p>카메라와 AI로 주변 상황을 이해하는 기술을 제품화</p></div>
+      </div>
+    </div>
+    <div class="footer">스펙보다 “무엇을 하는 사람인가” 중심</div><div class="slide-no">03</div>
+  </section>
+
+  <section class="slide dark">
+    <div class="number-cloud">101011 00101 11010<br/>22 184 7 93 255<br/>cat? person? desk?<br/>0.83 0.12 0.04<br/>pixels → patterns<br/>RGB RGB RGB RGB<br/>vision → meaning</div>
+    <div class="eyebrow">Computer Vision</div>
+    <h2>사람은 사진을 보지만,<br/>컴퓨터는 먼저 <span class="accent">숫자</span>를 봅니다</h2>
+    <p style="margin-top:26px;max-width:820px">컴퓨터 비전은 숫자 덩어리에서 사람, 사물, 상황, 의미를 읽어내게 만드는 기술입니다.</p>
+    <div class="pipeline">
+      <div class="pipe-card"><div class="emoji">📷</div><h3>본다</h3><p>카메라가 세상을 픽셀로 받아들입니다.</p><div class="arrow">→</div></div>
+      <div class="pipe-card"><div class="emoji">🧠</div><h3>이해한다</h3><p>AI 모델이 패턴과 의미를 찾습니다.</p><div class="arrow">→</div></div>
+      <div class="pipe-card"><div class="emoji">✨</div><h3>도와준다</h3><p>사람에게 필요한 경험으로 바뀝니다.</p></div>
+    </div>
+    <div class="footer">AI에게 눈을 만들어주는 일</div><div class="slide-no">04</div>
+  </section>
+
+  <section class="slide light">
+    <div class="phone-layout">
+      <div class="phone"><div class="screen"><div class="screen-title">Smart AI Camera</div><div class="screen-card"><div class="scan">👀</div><div class="bar" style="width:92%"></div><div class="bar" style="width:72%"></div><div class="bar" style="width:56%"></div></div><div class="screen-card"><b style="font-size:20px">Scene understood</b><p style="font-size:17px;margin-top:6px;color:#64748b">필요한 정보를 먼저 알려줌</p></div></div></div>
+      <div>
+        <div class="eyebrow">AX: AI Experience</div>
+        <h2>좋은 AI는<br/>“똑똑하다”에서 끝나지 않고<br/><span class="accent">도움이 된다</span></h2>
+        <div class="card-grid" style="grid-template-columns:1fr 1fr;margin-top:38px">
+          <div class="card"><div class="num">01</div><h3>정확함</h3><p>AI가 상황을 잘 이해해야 합니다.</p></div>
+          <div class="card"><div class="num">02</div><h3>빠름</h3><p>제품 안에서는 기다림도 성능입니다.</p></div>
+          <div class="card big-card"><div class="num">03</div><h3>사람에게 자연스러움</h3><p>기술이 아니라 경험으로 느껴져야 합니다.</p></div>
+        </div>
+      </div>
+    </div>
+    <div class="footer">기술 → 제품 → 경험</div><div class="slide-no">05</div>
+  </section>
+
+  <section class="slide soft">
+    <div class="eyebrow">My Turning Point</div>
+    <h2>그런데 저는 처음부터<br/>이 길 위에 있던 사람은<br/><span class="accent">아니었습니다</span></h2>
+    <div class="timeline">
+      <div class="t-step"><div class="t-dot"></div><small>START</small><h3>건국대 충주캠퍼스</h3><p>처음 출발점이 지금의 모습은 아니었습니다.</p></div>
+      <div class="t-step"><div class="t-dot"></div><small>MOMENT</small><h3>Google Korea 세미나</h3><p>주변의 좋은 학교 학생들 사이에서 위축됐습니다.</p></div>
+      <div class="t-step"><div class="t-dot"></div><small>TURN</small><h3>편입 준비</h3><p>초라함을 열등감이 아니라 연료로 바꾸기로 했습니다.</p></div>
+      <div class="t-step"><div class="t-dot"></div><small>NEXT</small><h3>성균관대 · 대학원 · AI</h3><p>그 선택이 다음 선택지를 열어줬습니다.</p></div>
+    </div>
+    <div class="footer">출발점보다 중요한 것은 방향</div><div class="slide-no">06</div>
+  </section>
+
+  <section class="slide focus">
+    <div class="message">
+      <div class="eyebrow" style="justify-content:center">One Sentence</div>
+      <div class="huge">지금 내 위치가<br/><span class="accent">내 끝은 아니다</span></div>
+      <p>그때 학교가 부끄러웠다기보다,<br/>내가 나를 당당하게 설명하지 못한다는 사실이 속상했습니다.</p>
+    </div>
+    <div class="footer">학생들이 기억할 핵심 문장</div><div class="slide-no">07</div>
+  </section>
+
+  <section class="slide dark">
+    <div class="eyebrow">Study in the AI Era</div>
+    <h2>AI 시대에는<br/>공부의 의미가<br/><span class="accent">바뀝니다</span></h2>
+    <div class="split">
+      <div class="compare"><h3>예전의 공부 이미지</h3><ul><li>정답을 외운다</li><li>문제를 빨리 푼다</li><li>시험이 끝나면 잊는다</li></ul></div>
+      <div class="compare dark-box"><h3>앞으로의 공부</h3><ul><li>좋은 질문을 만든다</li><li>답을 검증한다</li><li>새 문제를 해결한다</li></ul></div>
+    </div>
+    <div class="footer">외우기에서 판단하기로</div><div class="slide-no">08</div>
+  </section>
+
+  <section class="slide light">
+    <div class="eyebrow">Reason 1</div>
+    <h2>좋은 질문은<br/><span class="accent">아는 만큼</span> 나옵니다</h2>
+    <p style="margin-top:24px;max-width:900px">AI는 질문을 잘할수록 좋은 답을 줍니다. 그런데 좋은 질문은 아무것도 모르는 상태에서 나오기 어렵습니다.</p>
+    <div class="prompt-card">
+      <div class="prompt"><span class="bad">나쁜 질문</span>  “수학 알려줘.”<br/><br/><span class="good">좋은 질문</span>  “이차함수 그래프가 왜 아래로 볼록/위로 볼록이 되는지, 고1 수준 예시로 설명해줘. 그리고 내가 헷갈릴 만한 함정도 알려줘.”</div>
+    </div>
+    <div class="footer">공부 = AI에게 더 잘 묻는 힘</div><div class="slide-no">09</div>
+  </section>
+
+  <section class="slide soft">
+    <div class="eyebrow">Reason 2</div>
+    <h2>AI는 가끔<br/><span class="orange">자신 있게 틀립니다</span></h2>
+    <div class="warning-grid">
+      <div class="warning-sign"></div>
+      <div class="checklist">
+        <div class="check"><div><b>답이 맞는가?</b><p>그럴듯한 문장과 정확한 사실은 다릅니다.</p></div></div>
+        <div class="check"><div><b>근거가 있는가?</b><p>왜 그런 답이 나왔는지 확인해야 합니다.</p></div></div>
+        <div class="check"><div><b>내 상황에 맞는가?</b><p>좋은 답도 맥락이 다르면 틀린 선택이 됩니다.</p></div></div>
+      </div>
+    </div>
+    <div class="footer">공부 = AI 답을 검증하는 기준</div><div class="slide-no">10</div>
+  </section>
+
+  <section class="slide light">
+    <div class="eyebrow">Reason 3</div>
+    <h2>공부는 꿈을 미리 정하는 일이 아니라<br/><span class="accent">나중에 갈 수 있는 문</span>을<br/>열어두는 일입니다</h2>
+    <div class="doors">
+      <div class="door"><span>💻</span><b>개발자</b><p>문제를 코드로 해결</p></div>
+      <div class="door"><span>🔬</span><b>연구자</b><p>새로운 기술 탐구</p></div>
+      <div class="door"><span>🎨</span><b>기획/디자인</b><p>사람이 원하는 경험 설계</p></div>
+      <div class="door"><span>🌍</span><b>무엇이든</b><p>아직 이름 없는 미래 직업</p></div>
+    </div>
+    <div class="footer">공부 = 선택지를 넓히는 일</div><div class="slide-no">11</div>
+  </section>
+
+  <section class="slide dark">
+    <div class="eyebrow">Three Powers</div>
+    <h2>AI 시대에 필요한<br/>세 가지 공부 능력</h2>
+    <div class="card-grid">
+      <div class="card"><div class="num">01</div><h3>질문력</h3><p>무엇을 물어봐야 하는지 아는 힘</p></div>
+      <div class="card"><div class="num">02</div><h3>판단력</h3><p>답이 맞는지 확인하는 기준</p></div>
+      <div class="card"><div class="num">03</div><h3>문제해결력</h3><p>답을 내 상황에 적용하는 능력</p></div>
+    </div>
+    <div class="quote-box"><p>정답을 찾는 사람보다, 좋은 문제를 정의하는 사람이 더 중요해집니다.</p></div>
+    <div class="footer">오늘 발표의 중심 메시지</div><div class="slide-no">12</div>
+  </section>
+
+  <section class="slide soft">
+    <div class="eyebrow">Try This</div>
+    <h2>지금부터 해보면 좋은<br/><span class="accent">세 가지 작은 습관</span></h2>
+    <div class="action-grid">
+      <div class="action"><div class="icon">❓</div><h3>질문하기</h3><p>“왜?”를 한 번 더 물어보세요.</p><div class="example">예: 왜 이 공식이 나왔지?</div></div>
+      <div class="action"><div class="icon">🛠️</div><h3>만들어보기</h3><p>앱, 영상, 발표, 실험 — 작게라도 직접 써보세요.</p><div class="example">예: AI로 공부 도우미 만들기</div></div>
+      <div class="action"><div class="icon">📝</div><h3>기록하기</h3><p>내가 배운 것과 헷갈린 것을 남기세요.</p><div class="example">예: 오늘의 질문 1줄</div></div>
+    </div>
+    <div class="footer">대단한 시작보다 작은 반복</div><div class="slide-no">13</div>
+  </section>
+
+  <section class="slide light">
+    <div class="eyebrow">What I Learned</div>
+    <h2>제가 믿게 된 공식</h2>
+    <div class="formula">
+      <div class="formula-card"><h3>비교</h3><p>남과 비교하면 오늘의 나는 작아 보입니다.</p><div style="font-size:72px;margin-top:28px">😵‍💫</div></div>
+      <div class="operator">≠</div>
+      <div class="formula-card"><h3>누적</h3><p>어제보다 조금 나아지는 것이 결국 방향을 바꿉니다.</p><div class="growth-line"></div></div>
+    </div>
+    <div class="footer">열등감을 연료로 바꾸는 방법</div><div class="slide-no">14</div>
+  </section>
+
+  <section class="slide focus">
+    <div class="message">
+      <div class="eyebrow" style="justify-content:center">Remember This</div>
+      <div class="huge"><span class="underline">출발점</span>은<br/>끝점이 아닙니다</div>
+      <p>지금 성적, 지금 학교, 지금 자신감이<br/>여러분의 미래 전체를 결정하지 않습니다.</p>
+    </div>
+    <div class="footer">마지막 동기부여 메시지</div><div class="slide-no">15</div>
+  </section>
+
+  <section class="slide final">
+    <div style="height:100%;display:flex;flex-direction:column;justify-content:center;max-width:1050px">
+      <div class="eyebrow">Closing</div>
+      <h2>AI를 쓰는 사람을 넘어,<br/><span class="accent">방향을 정하는 사람</span>이 되자</h2>
+      <p>공부는 시험지만을 위한 것이 아니라, AI를 도구로 삼아 더 큰 문제를 해결하기 위한 준비입니다.</p>
+      <div class="chips" style="margin-top:48px"><div class="chip">좋은 질문</div><div class="chip">스스로 판단</div><div class="chip">계속 배우기</div></div>
+    </div>
+    <div class="qa">Q&A</div>
+    <div class="source-note">Design inspiration checked via Lazyweb MCP: Microsoft AI in Education, Apple Education, GitHub/Genie dark AI landing pages, Canva/Brainscape learning cards, and minimalist one-message title screens. No external screenshots are embedded in this deck.</div>
+    <div class="slide-no">16</div>
+  </section>
+</div>
+<div class="progress" id="progress"></div>
+<div class="help">←/→ 이동 · F 전체화면 · P 인쇄/PDF</div>
+<div class="nav"><button id="prev">‹</button><button id="next">›</button></div>
+<script>
+(function(){
+  const slides=[...document.querySelectorAll('.slide')];
+  const progress=document.getElementById('progress');
+  let idx=Math.min(Math.max(parseInt(location.hash.replace('#','')||'1',10)-1,0),slides.length-1);
+  function show(i){
+    idx=(i+slides.length)%slides.length;
+    slides.forEach((s,n)=>s.classList.toggle('active',n===idx));
+    progress.style.width=((idx+1)/slides.length*100)+'%';
+    history.replaceState(null,'','#'+(idx+1));
+  }
+  document.getElementById('prev').onclick=()=>show(idx-1);
+  document.getElementById('next').onclick=()=>show(idx+1);
+  window.addEventListener('hashchange',()=>{
+    const n=parseInt(location.hash.replace('#','')||'1',10)-1;
+    if(!Number.isNaN(n)) show(Math.min(Math.max(n,0),slides.length-1));
+  });
+  document.addEventListener('keydown',e=>{
+    if(['ArrowRight','PageDown',' '].includes(e.key)){e.preventDefault();show(idx+1)}
+    if(['ArrowLeft','PageUp','Backspace'].includes(e.key)){e.preventDefault();show(idx-1)}
+    if(e.key==='f'||e.key==='F'){document.documentElement.requestFullscreen?.()}
+    if(e.key==='p'||e.key==='P'){window.print()}
+  });
+  show(idx);
+})();
+</script>
+</body>
+</html>
