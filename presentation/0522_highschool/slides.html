@@ -126,6 +126,11 @@
   .capability-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:46px}.capability{border-radius:28px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);padding:24px;min-height:158px}.capability span{font-size:38px}.capability b{display:block;font-size:22px;margin-top:18px;letter-spacing:-.035em}.capability p{font-size:17px;color:#cbd7ff;margin-top:8px}
   .slide.present .stat-card,.slide.present .capability,.slide.present .method{animation:fadeUp .78s cubic-bezier(.16,1,.3,1) both;}
   .slide.present .stat-card:nth-child(1),.slide.present .capability:nth-child(1){animation-delay:.12s}.slide.present .stat-card:nth-child(2),.slide.present .capability:nth-child(2){animation-delay:.2s}.slide.present .stat-card:nth-child(3),.slide.present .capability:nth-child(3){animation-delay:.28s}.slide.present .capability:nth-child(4){animation-delay:.36s}.slide.present .capability:nth-child(5){animation-delay:.44s}.slide.present .capability:nth-child(6){animation-delay:.52s}.slide.present .capability:nth-child(7){animation-delay:.6s}.slide.present .capability:nth-child(8){animation-delay:.68s}
+
+  .capability-grid.compact{margin-top:30px;gap:14px}
+  .capability-grid.compact .capability{min-height:126px;padding:20px}
+  .capability-grid.compact .capability span{font-size:30px}.capability-grid.compact .capability b{font-size:20px;margin-top:12px}.capability-grid.compact .capability p{font-size:15px;margin-top:6px}
+  .split.compact{margin-top:30px}.split.compact .compare{padding:32px}.split.compact .compare h3{font-size:30px}.split.compact .compare ul{margin-top:22px}.split.compact .compare li{font-size:21px;margin:14px 0}
   .method-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;margin-top:44px}
   .method{border-radius:34px;background:#fff;border:1px solid #e2ebff;padding:32px;box-shadow:var(--shadow);min-height:270px}
   .method small{display:inline-flex;border-radius:999px;background:#eff6ff;color:#2563eb;padding:8px 13px;font-size:15px;font-weight:950;letter-spacing:.02em;margin-bottom:18px}
@@ -232,7 +237,6 @@
       <div class="stat-card"><div><div class="stat">54%</div><h3>학교 공부 도움</h3></div><p>리서치, 수학 문제, 글 수정 등에 활용</p></div>
       <div class="stat-card"><div><div class="stat">47%</div><h3>재미/엔터테인먼트</h3></div><p>대화, 놀이, 콘텐츠 만들기에도 사용</p></div>
     </div>
-    <div class="source-line">Source: Pew Research Center, How Teens Use and View AI, 2026</div>
     <div class="slide-no">03</div>
   </section>
   <section class="slide light">
@@ -247,48 +251,45 @@
       </div>
     </div>
     <div class="chips" style="margin-top:30px"><div class="chip">MMMU +18.8%p</div><div class="chip">GPQA +48.9%p</div><div class="chip">SWE-bench +67.3%p</div></div>
-    <div class="source-line">Source: Stanford HAI, 2025 AI Index Report</div>
     <div class="slide-no">04</div>
   </section>
   <section class="slide dark">
     <div class="eyebrow">Beyond Chatbot</div>
-    <h2>AI는 이제 검색창이 아니라<br/>여러 도구가 합쳐진<br/><span class="accent">작업대</span>에 가깝습니다</h2>
-    <p style="margin-top:24px;max-width:900px">예전에는 내가 검색해서 찾아야 했다면, 이제는 AI가 설명하고, 비교하고, 만들고, 피드백까지 해줍니다.</p>
-    <div class="capability-grid">
-      <div class="capability"><span>📚</span><b>요약</b><p>긴 글을 핵심만 정리</p></div>
-      <div class="capability"><span>🖼️</span><b>이미지 이해</b><p>사진·도표 속 정보 파악</p></div>
+    <h2 style="font-size:52px">AI는 이제 검색창이 아니라<br/>여러 도구가 합쳐진<br/><span class="accent">작업대</span>에 가깝습니다</h2>
+    <p style="margin-top:20px;max-width:900px">예전에는 내가 검색해서 찾아야 했다면, 이제는 AI가 설명하고, 비교하고, 만들고, 피드백까지 해줍니다.</p>
+    <div class="capability-grid compact">
+      <div class="capability"><span>📚</span><b>요약</b><p>긴 글 핵심 정리</p></div>
+      <div class="capability"><span>🖼️</span><b>이미지 이해</b><p>사진·도표 파악</p></div>
       <div class="capability"><span>🗣️</span><b>영어 회화</b><p>상황별 대화 연습</p></div>
-      <div class="capability"><span>💻</span><b>코딩</b><p>아이디어를 빠르게 구현</p></div>
-      <div class="capability"><span>🎨</span><b>이미지/영상</b><p>콘텐츠 초안 만들기</p></div>
-      <div class="capability"><span>🎤</span><b>발표 준비</b><p>구성·대본·피드백</p></div>
-      <div class="capability"><span>🧮</span><b>수학 설명</b><p>풀이 과정을 단계별로</p></div>
+      <div class="capability"><span>💻</span><b>코딩</b><p>아이디어 구현</p></div>
+      <div class="capability"><span>🎨</span><b>이미지/영상</b><p>콘텐츠 초안</p></div>
+      <div class="capability"><span>🎤</span><b>발표 준비</b><p>구성·대본 피드백</p></div>
+      <div class="capability"><span>🧮</span><b>수학 설명</b><p>풀이 과정 설명</p></div>
       <div class="capability"><span>🔎</span><b>풀이 검사</b><p>틀린 지점 찾기</p></div>
     </div>
     <div class="slide-no">05</div>
   </section>
   <section class="slide soft">
     <div class="eyebrow">Same Tool, Different Result</div>
-    <h2>같은 AI를 써도<br/><span class="accent">결과는 완전히</span><br/>달라질 수 있습니다</h2>
-    <div class="split" style="margin-top:42px">
+    <h2 style="font-size:52px">같은 AI를 써도<br/><span class="accent">결과는 완전히</span><br/>달라질 수 있습니다</h2>
+    <div class="split compact">
       <div class="compare"><h3>그냥 쓰는 사람</h3><ul><li>답만 복사한다</li><li>틀려도 모른다</li><li>과제를 끝내는 데만 쓴다</li></ul></div>
       <div class="compare dark-box"><h3>잘 쓰는 사람</h3><ul><li>이해하려고 다시 묻는다</li><li>근거를 확인한다</li><li>실력을 늘리는 데 쓴다</li></ul></div>
     </div>
-    <div class="quote-box" style="margin-top:34px"><p>AI는 실력을 키워줄 수도 있고,<br/>실력을 가려버릴 수도 있습니다.</p></div>
+    <div class="quote-box" style="margin-top:26px;padding:26px"><p style="font-size:26px">AI는 실력을 키워줄 수도 있고,<br/>실력을 가려버릴 수도 있습니다.</p></div>
     <div class="slide-no">06</div>
   </section>
   <section class="slide focus">
     <div class="message">
       <div class="eyebrow" style="justify-content:center">Today’s Question</div>
       <div class="huge" style="font-size:80px">우리는 AI에게<br/><span class="accent">끌려가는 사람</span>이 될까요,<br/>AI를 <span class="accent">도구로 쓰는 사람</span>이 될까요?</div>
-      <p style="margin-top:34px">이 질문을 제 이야기와 연결해보겠습니다. 저도 처음부터 이런 길 위에 있었던 사람은 아니었습니다.</p>
     </div>
     <div class="slide-no">07</div>
   </section>
   <section class="slide soft">
     <div class="eyebrow">My Story</div>
-    <h2>저도 처음부터<br/><span class="accent">이런 길 위에</span><br/>있었던 건 아닙니다</h2>
-    <p style="margin-top:26px;max-width:850px">처음부터 AI를 연구하고, 대기업에서 AI 일을 하는 길이 정해져 있었던 것은 아닙니다. 제 출발점은 지금 보이는 이력과 꽤 달랐습니다.</p>
-    <div class="timeline">
+    <h2 style="font-size:50px">처음부터 AI를 연구하고,<br/>대기업에서 AI 일을 하는 길이<br/><span class="accent">정해져 있던 건 아닙니다</span><br/>출발점은 꽤 달랐습니다</h2>
+    <div class="timeline" style="margin-top:46px">
       <div class="t-step"><div class="t-dot"></div><small>START</small><h3>건국대 충주캠퍼스</h3><p>처음 출발점이 지금의 모습은 아니었습니다.</p></div>
       <div class="t-step"><div class="t-dot"></div><small>MOMENT</small><h3>Google Korea 세미나</h3><p>내 위치와 가고 싶은 곳 사이의 거리를 느꼈습니다.</p></div>
       <div class="t-step"><div class="t-dot"></div><small>TURN</small><h3>편입 준비</h3><p>달라져야겠다는 생각을 공부로 옮겼습니다.</p></div>
@@ -297,21 +298,22 @@
     <div class="slide-no">08</div>
   </section>
   <section class="slide dark">
-    <div class="eyebrow">Turning Point</div>
-    <h2>“내가 가고 싶은 곳”과<br/>“지금의 나” 사이에<br/><span class="accent">거리</span>가 있었습니다</h2>
-    <div class="method-grid">
-      <div class="method"><small>01</small><h3>주변의 분위기</h3><p>세미나에 온 학생들은 좋은 학교와 좋은 기회를 자연스럽게 이야기했습니다.</p></div>
-      <div class="method"><small>02</small><h3>작아지는 느낌</h3><p>저는 제 자신을 당당하게 소개하지 못하는 느낌을 받았습니다.</p></div>
-      <div class="method"><small>03</small><h3>바뀐 생각</h3><p>“내가 원하는 곳에 가려면 지금과는 달라져야겠다”고 느꼈습니다.</p></div>
-      <div class="method"><small>04</small><h3>다음 행동</h3><p>그 불편한 감정을 그냥 넘기지 않고, 공부를 다시 시작하는 계기로 삼았습니다.</p></div>
+    <div class="eyebrow">What Study Built</div>
+    <h2>공부하면서 생긴 건<br/>점수보다<br/><span class="accent">생각하는 방식</span>이었습니다</h2>
+    <p style="margin-top:24px;max-width:900px">편입을 준비하고 전공을 깊게 공부하면서, 모르는 것을 다루는 방식이 조금씩 바뀌었습니다.</p>
+    <div class="method-grid" style="margin-top:34px">
+      <div class="method"><small>01</small><h3>막힌 지점 찾기</h3><p>무엇을 모르는지 먼저 분리하는 연습</p></div>
+      <div class="method"><small>02</small><h3>질문으로 바꾸기</h3><p>막연함을 구체적인 질문으로 바꾸는 연습</p></div>
+      <div class="method"><small>03</small><h3>근거 확인하기</h3><p>답이 맞는지 설명과 기준으로 검증하는 연습</p></div>
+      <div class="method"><small>04</small><h3>직접 적용하기</h3><p>배운 것을 코드, 연구, 제품에 써보는 연습</p></div>
     </div>
     <div class="slide-no">09</div>
   </section>
   <section class="slide focus">
     <div class="message">
-      <div class="eyebrow" style="justify-content:center">What Changed</div>
-      <div class="huge" style="font-size:76px">공부는 나를 증명하는 일이 아니라,<br/><span class="accent">지금의 나를 나중에 바꾸는</span><br/>가장 현실적인 방법이었습니다</div>
-      <p style="margin-top:34px">바로 인생이 바뀐다는 뜻은 아닙니다. 다만 모르는 것을 하나씩 줄이면, 내가 갈 수 있는 방향은 조금씩 넓어집니다.</p>
+      <div class="eyebrow" style="justify-content:center">Bridge to AI</div>
+      <div class="huge" style="font-size:76px">돌아보면 그 연습이<br/>지금 AI를 다루는<br/><span class="accent">기본기</span>가 됐습니다</div>
+      <p style="margin-top:34px">AI 업무에서도 매일 반복합니다. 목표를 정하고, 답을 검증하고, 실제 제품에 적용합니다.</p>
     </div>
     <div class="slide-no">10</div>
   </section>
