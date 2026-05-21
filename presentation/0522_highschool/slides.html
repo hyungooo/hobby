@@ -132,9 +132,13 @@
   .capability-grid.compact .capability span{font-size:30px}.capability-grid.compact .capability b{font-size:20px;margin-top:12px}.capability-grid.compact .capability p{font-size:15px;margin-top:6px}
   .split.compact{margin-top:30px}.split.compact .compare{padding:32px}.split.compact .compare h3{font-size:30px}.split.compact .compare ul{margin-top:22px}.split.compact .compare li{font-size:21px;margin:14px 0}
   .method-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;margin-top:44px}
+  .method-grid.tight{gap:16px;margin-top:24px}
   .method{border-radius:34px;background:#fff;border:1px solid #e2ebff;padding:32px;box-shadow:var(--shadow);min-height:270px}
+  .method-grid.tight .method{min-height:160px;padding:22px 24px;border-radius:28px}
   .method small{display:inline-flex;border-radius:999px;background:#eff6ff;color:#2563eb;padding:8px 13px;font-size:15px;font-weight:950;letter-spacing:.02em;margin-bottom:18px}
+  .method-grid.tight .method small{font-size:13px;padding:6px 10px;margin-bottom:12px}
   .method h3{font-size:32px}.method p{font-size:20px;color:#64748b;margin-top:14px}
+  .method-grid.tight .method h3{font-size:26px}.method-grid.tight .method p{font-size:18px;margin-top:9px}
   .method .prompt{margin-top:20px;border-radius:20px;background:#f8fbff;border:1px solid #e2ebff;padding:18px;color:#1e293b;font-size:18px;line-height:1.5}
   .dark .method{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.16);box-shadow:none}.dark .method p{color:#cbd7ff}.dark .method .prompt{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.16);color:#dbeafe}
   .story-quote{border-radius:42px;background:#07111f;color:#fff;padding:46px;box-shadow:0 30px 80px rgba(7,17,31,.24)}
@@ -183,6 +187,14 @@
   .slide.active:not(.present) .prompt-card,
   .slide.active:not(.present) .quote-box,
   .slide.active:not(.present) .number-cloud{opacity:0}
+
+
+
+  .reveal-step{opacity:0;transform:translateY(28px);pointer-events:none;will-change:opacity,transform}
+  .slide.present .reveal-step:not(.revealed){opacity:0!important;transform:translateY(28px)!important;animation:none!important;pointer-events:none!important}
+  .slide.present .reveal-step.revealed{opacity:1!important;pointer-events:auto!important;animation:fadeUp .58s cubic-bezier(.16,1,.3,1) both!important}
+  .slide.present .reveal-step.revealed.orb-wrap,.slide.present .reveal-step.revealed.phone,.slide.present .reveal-step.revealed.warning-sign{animation:popIn .66s cubic-bezier(.16,1,.3,1) both!important}
+  @media print{.reveal-step{opacity:1!important;transform:none!important;animation:none!important;pointer-events:auto!important}}
 
   @media print{
     html,body{height:auto;overflow:visible;background:#fff}.deck{width:100vw;height:auto;box-shadow:none;overflow:visible}.slide{display:block!important;position:relative;width:100vw;height:56.25vw;page-break-after:always}.progress,.nav,.help{display:none}.slide-no,.footer{display:none}
@@ -299,9 +311,9 @@
   </section>
   <section class="slide dark">
     <div class="eyebrow">What Study Built</div>
-    <h2>공부하면서 생긴 건<br/>점수보다<br/><span class="accent">생각하는 방식</span>이었습니다</h2>
-    <p style="margin-top:24px;max-width:900px">편입을 준비하고 전공을 깊게 공부하면서, 모르는 것을 다루는 방식이 조금씩 바뀌었습니다.</p>
-    <div class="method-grid" style="margin-top:34px">
+    <h2 style="font-size:52px">공부하면서 생긴 건<br/>점수보다<br/><span class="accent">생각하는 방식</span>이었습니다</h2>
+    <p style="margin-top:18px;max-width:900px;font-size:22px">편입을 준비하고 전공을 깊게 공부하면서, 모르는 것을 다루는 방식이 조금씩 바뀌었습니다.</p>
+    <div class="method-grid tight">
       <div class="method"><small>01</small><h3>막힌 지점 찾기</h3><p>무엇을 모르는지 먼저 분리하는 연습</p></div>
       <div class="method"><small>02</small><h3>질문으로 바꾸기</h3><p>막연함을 구체적인 질문으로 바꾸는 연습</p></div>
       <div class="method"><small>03</small><h3>근거 확인하기</h3><p>답이 맞는지 설명과 기준으로 검증하는 연습</p></div>
@@ -368,37 +380,114 @@
   </section>
 </div>
 <div class="progress" id="progress"></div>
-<div class="help">←/→ 이동 · F 전체화면 · P 인쇄/PDF</div>
+<div class="help">→ 내용 보기/다음 · ← 이전 내용/이전 · F 전체화면 · P 인쇄/PDF</div>
 <div class="nav"><button id="prev">‹</button><button id="next">›</button></div>
 <script>
 (function(){
   const slides=[...document.querySelectorAll('.slide')];
   const progress=document.getElementById('progress');
   const deckEl=document.getElementById('deck');
+  const revealSelectors=[
+    ':scope > p',
+    ':scope > div > p',
+    ':scope .profile-map > div:first-child > p',
+    ':scope .question-grid > div:first-child > p',
+    ':scope .message > p',
+    ':scope .title-sub',
+    ':scope .chips',
+    ':scope .orb-wrap',
+    ':scope .badge',
+    ':scope .stat-card',
+    ':scope .speed-box',
+    ':scope .capability',
+    ':scope .compare',
+    ':scope .quote-box',
+    ':scope .t-step',
+    ':scope .method',
+    ':scope .card',
+    ':scope .pipe-card',
+    ':scope .check',
+    ':scope .door',
+    ':scope .action',
+    ':scope .formula-card',
+    ':scope .prompt-card',
+    ':scope .phone',
+    ':scope .warning-sign',
+    ':scope .number-cloud',
+    ':scope .qa'
+  ];
+  const revealMap=new Map();
   let idx=Math.min(Math.max(parseInt(location.hash.replace('#','')||'1',10)-1,0),slides.length-1);
-  function show(i){
+  let step=0;
+
+  function unique(list){
+    const seen=new Set();
+    return list.filter(el=>{
+      if(!el || seen.has(el) || el.classList.contains('slide-no') || el.classList.contains('eyebrow')) return false;
+      seen.add(el);
+      return true;
+    });
+  }
+  function collectRevealables(slide){
+    const items=unique(revealSelectors.flatMap(sel=>[...slide.querySelectorAll(sel)]));
+    items.forEach(el=>el.classList.add('reveal-step'));
+    revealMap.set(slide,items);
+    return items;
+  }
+  slides.forEach(collectRevealables);
+
+  function applyReveals(slide,count){
+    const items=revealMap.get(slide)||[];
+    items.forEach((el,i)=>el.classList.toggle('revealed',i<count));
+  }
+  function show(i,initialStep=0){
     idx=(i+slides.length)%slides.length;
-    slides.forEach(s=>s.classList.remove('active','present'));
-    // Force a reflow so CSS entrance animations replay even when opened as a local file.
+    step=initialStep;
+    slides.forEach(s=>{
+      s.classList.remove('active','present');
+      applyReveals(s,0);
+    });
     void deckEl.offsetWidth;
     slides[idx].classList.add('active');
+    applyReveals(slides[idx],step);
     requestAnimationFrame(()=>requestAnimationFrame(()=>slides[idx].classList.add('present')));
     progress.style.width=((idx+1)/slides.length*100)+'%';
     history.replaceState(null,'','#'+(idx+1));
   }
-  document.getElementById('prev').onclick=()=>show(idx-1);
-  document.getElementById('next').onclick=()=>show(idx+1);
+  function revealNext(){
+    const slide=slides[idx];
+    const items=revealMap.get(slide)||[];
+    if(step<items.length){
+      step+=1;
+      applyReveals(slide,step);
+    }else{
+      show(idx+1,0);
+    }
+  }
+  function revealPrev(){
+    const slide=slides[idx];
+    const items=revealMap.get(slide)||[];
+    if(step>0){
+      step-=1;
+      applyReveals(slide,step);
+    }else{
+      const prev=(idx-1+slides.length)%slides.length;
+      show(prev,(revealMap.get(slides[prev])||[]).length);
+    }
+  }
+  document.getElementById('prev').onclick=revealPrev;
+  document.getElementById('next').onclick=revealNext;
   window.addEventListener('hashchange',()=>{
     const n=parseInt(location.hash.replace('#','')||'1',10)-1;
-    if(!Number.isNaN(n)) show(Math.min(Math.max(n,0),slides.length-1));
+    if(!Number.isNaN(n)) show(Math.min(Math.max(n,0),slides.length-1),0);
   });
   document.addEventListener('keydown',e=>{
-    if(['ArrowRight','PageDown',' '].includes(e.key)){e.preventDefault();show(idx+1)}
-    if(['ArrowLeft','PageUp','Backspace'].includes(e.key)){e.preventDefault();show(idx-1)}
+    if(['ArrowRight','PageDown',' '].includes(e.key)){e.preventDefault();revealNext()}
+    if(['ArrowLeft','PageUp','Backspace'].includes(e.key)){e.preventDefault();revealPrev()}
     if(e.key==='f'||e.key==='F'){document.documentElement.requestFullscreen?.()}
     if(e.key==='p'||e.key==='P'){window.print()}
   });
-  show(idx);
+  show(idx,0);
 })();
 </script>
 </body>
