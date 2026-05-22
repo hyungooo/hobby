@@ -388,13 +388,18 @@
       return true;
     });
   }
-  function collectRevealables(slide){
+  function collectRevealables(slide,slideIndex){
+    // Keep opening and closing slides fully visible from the start.
+    if(slideIndex===0 || slideIndex===slides.length-1){
+      revealMap.set(slide,[]);
+      return [];
+    }
     const items=unique(revealSelectors.flatMap(sel=>[...slide.querySelectorAll(sel)]));
     items.forEach(el=>el.classList.add('reveal-step'));
     revealMap.set(slide,items);
     return items;
   }
-  slides.forEach(collectRevealables);
+  slides.forEach((slide,i)=>collectRevealables(slide,i));
 
   function applyReveals(slide,count){
     const items=revealMap.get(slide)||[];
